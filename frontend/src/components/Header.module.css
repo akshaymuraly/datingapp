@@ -1,0 +1,21 @@
+.container{
+    background-color:#353749;
+    color: white;
+    box-shadow: 1px -1px 9px 1px black;
+}
+.container>nav>ul{
+    height: 90px;
+    padding:10px;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.container>nav>ul>li{
+    text-align: center;
+}
+.link{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
