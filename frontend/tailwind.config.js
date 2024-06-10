@@ -4,6 +4,9 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      scrollbarWidth: {
+        thin: "thin",
+      },
       colors: {
         "regal-blue": "#243c5a",
         primary: {
