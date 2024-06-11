@@ -25,6 +25,9 @@ export default {
       },
     },
     fontFamily: {
+      jost: ["Jost"],
+      josefin: ["Josefin Sans"],
+      roboto: ["Roboto"],
       body: [
         "Inter",
         "ui-sans-serif",
