@@ -1,4 +1,4 @@
-
+import { IoMdSend } from "react-icons/io";
 const ChatWindow = () => {
   return (
     <div className="text-black h-screen">
@@ -15,8 +15,13 @@ const ChatWindow = () => {
             </p>
         </section>
 
-        <div className="bg-[#2a3942] text-white h-[88px]">
-            reply
+        <div className="bg-[#2a3942] text-white h-[88px] flex flex-row justify-center items-center p-8 gap-2">
+             <input
+          type="text"
+          name="contact"
+          className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+        />
+            <button className="h-[30px] w-[30px]"><IoMdSend className="w-full h-full hover:text-blue-500 transition-all ease-in"/></button>
         </div>
     </div>
     

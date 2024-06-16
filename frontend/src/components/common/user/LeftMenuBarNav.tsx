@@ -15,7 +15,12 @@ const LeftMenuBarNav:React.FC<LeftMenuBarNavProps> = ({setSelectedWindow,selecte
             </li>
             <li>
                 <a id="messages" className="relative flex w-full h-full items-center justify-center cursor-pointer" onClick={(e:React.MouseEvent<HTMLAnchorElement>)=>setSelectedWindow(e.currentTarget.id)}>Messages
-                <div className={`absolute ${selectedWindow==="matched"?"hidden":"inline"} bottom-1 bg-red-300 w-full h-[3px]`}></div>
+                <div className={`absolute ${selectedWindow==="messages"?"inline":"hidden"} bottom-1 bg-red-300 w-full h-[3px]`}></div>
+                </a>
+            </li>
+            <li>
+                <a id="requests" className="relative flex w-full h-full items-center justify-center cursor-pointer" onClick={(e:React.MouseEvent<HTMLAnchorElement>)=>setSelectedWindow(e.currentTarget.id)}>Requests
+                <div className={`absolute ${selectedWindow==="requests"?"inline":"hidden"} bottom-1 bg-red-300 w-full h-[3px]`}></div>
                 </a>
             </li>
         </ul>

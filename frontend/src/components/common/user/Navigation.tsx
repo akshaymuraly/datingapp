@@ -6,7 +6,7 @@ import { IoMdSettings } from "react-icons/io";
 const Navigation = () => {
   return (
     <nav>
-        <ul className="flex font-mono flex-row bg-[#373A40] text-white h-[50px] p-2 justify-around align-middle">
+        <ul className="flex font-mono flex-row bg-[#373A40] text-white h-[50px] p-4 justify-around align-middle">
             <li><Link to={"profile"} >
               <img src="/avatar2.jpg" alt="avatar2" className="h-[30px] w-[30px] rounded-full object-cover"/>
               {/* <span>Name S. Name</span> */}

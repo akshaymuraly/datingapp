@@ -8,3 +8,10 @@
      width: 12px;
      /* width of the scrollbar */
  }
+ @layer utilities {
+     .shadow-right-only {
+         /* Remove any existing shadow */
+         box-shadow: 4px 0 5px -2px rgba(0, 0, 0, 0.1);
+         /* Customize as needed */
+     }
+ }

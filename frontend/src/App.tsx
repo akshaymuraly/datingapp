@@ -9,6 +9,9 @@ import LeftMenuBarMessagesBody from "./components/common/user/LeftMenuBarMessage
 import RightWindow from "./components/layout/RightWindow";
 import ChatWindow from "./components/common/user/ChatWindow";
 import UserProfile from "./components/common/user/Profile";
+import UserDetails from "./components/common/user/UserDetails";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminLandingPage from "./pages/admin/AdminLandingPage";
 
 const App = () => {
   return (
@@ -21,7 +24,11 @@ const App = () => {
         <Route path="/userlanding" element={<UserLanding/>}>
           <Route path="user/chat/:chatid" element={<ChatWindow/>}/>
           <Route path="profile" element={<UserProfile/>}/>
+          <Route path="user/:userid" element={<UserDetails/>}/>
         </Route>
+
+        <Route path="/admin/login" element={<AdminLogin/>}/>
+        <Route path="/admin/landing" element={<AdminLandingPage/>}/>
       </Routes>
     </Router>
   )

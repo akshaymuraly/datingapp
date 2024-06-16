@@ -4,6 +4,7 @@ import LeftMenuBarNav from "../common/user/LeftMenuBarNav"
 import { useEffect, useState } from "react"
 import LeftMenuBarMatchedBody from "../common/user/LeftMenuBarMatchedBody"
 import LeftMenuBarMessagesBody from "../common/user/LeftMenuBarMessagesBody"
+import Requests from "../common/user/Requests"
 
 const MenuBar:React.FC = () => {
 
@@ -13,7 +14,8 @@ const MenuBar:React.FC = () => {
     <div className="bg-[#686D76] h-screen w-[35vw]">
         <Navigation/>
         <LeftMenuBarNav setSelectedWindow={setSelectedWindow} selectedWindow={selectedWindow}/>
-        {selectedWindow==="matched"?<LeftMenuBarMatchedBody/>:<LeftMenuBarMessagesBody/>}
+        {selectedWindow==="matched"?<LeftMenuBarMatchedBody/>:(
+          selectedWindow==="requests"?<Requests/>:<LeftMenuBarMessagesBody/>)}
     </div>
   )
 }
