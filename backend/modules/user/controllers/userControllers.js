@@ -3,14 +3,19 @@ const { CustomError } = require("../../../middlewares/CustomError");
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const path = require("path");
+const fs = require("fs");
 
 const UserSignup = AsyncHandler(async (req, res, next) => {
+  // console.log(req);
   const { Name, Location, Email, Password } = req.body;
   if (
     !Name ||
     !Location ||
     !Email ||
     !Password ||
+    !req.file ||
+    req.file === "" ||
     Location === "" ||
     Email === "" ||
     Name === "" ||
@@ -23,6 +28,11 @@ const UserSignup = AsyncHandler(async (req, res, next) => {
   if (duplicateUser) {
     return next(new CustomError("Already registered!", 301));
   }
+  //File upload block
+  const file = req.file;
+  const filepath = path.join(__dirname, "../profile", file.originalname);
+  await fs.promises.writeFile(filepath, file.buffer);
+
   const salt = await bcrypt.genSalt(16);
   const CryptedPassword = await bcrypt.hash(Password, salt);
   const user = new User({
@@ -77,12 +87,25 @@ const cookieValidation = AsyncHandler(async (req, res, next) => {
   }
   const { id } = await jwt.verify(token, process.env.JWT_TOKEN_KEY);
   req.id = id;
+  console.log(req.id);
   // return res.json({ message: "ok" });
   next();
+});
+
+const matchedProfiles = AsyncHandler(async (req, res, next) => {
+  const { gender, age, page, count } = req.query;
+  const start = (page - 1) * count;
+  const users = await User.find({ Gender: { $ne: gender } })
+    .skip(start)
+    .limit(count);
+  if (!users) return next(new CustomError("No matchin profile!", 401));
+
+  return res.json({ message: "profiles fetched!", users });
 });
 
 module.exports = {
   UserSignup,
   UserLogin,
   cookieValidation,
+  matchedProfiles,
 };

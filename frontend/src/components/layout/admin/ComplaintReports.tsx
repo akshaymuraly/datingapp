@@ -17,48 +17,6 @@ const complaintArray = [
         Affected:"Someone",
         Against:"Albert",
 
-    },
-     {
-        Type:"Spam",
-        Status:"active",
-        Message:`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        `,
-        Affected:"Someone",
-        Against:"Albert",
-
-    },
-     {
-        Type:"Spam",
-        Status:"active",
-        Message:`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        `,
-        Affected:"Someone",
-        Against:"Albert",
-
-    },
-     {
-        Type:"Spam",
-        Status:"active",
-        Message:`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga temporibus iusto molestiae sapiente, aut voluptatibus esse animi deserunt! Aperiam soluta possimus molestias, excepturi tempore labore dicta saepe sunt est beatae animi laboriosam
-        `,
-        Affected:"Someone",
-        Against:"Albert",
-
     }
     
 ]

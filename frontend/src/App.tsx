@@ -12,6 +12,7 @@ import UserProfile from "./components/common/user/Profile";
 import UserDetails from "./components/common/user/UserDetails";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminLandingPage from "./pages/admin/AdminLandingPage";
+import PrivateRoute from "./pages/PrivateRoute";
 
 const App = () => {
   return (
@@ -21,10 +22,12 @@ const App = () => {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/contact" element={<ContactUs/>}/>
-        <Route path="/userlanding" element={<UserLanding/>}>
-          <Route path="user/chat/:chatid" element={<ChatWindow/>}/>
-          <Route path="profile" element={<UserProfile/>}/>
-          <Route path="user/:userid" element={<UserDetails/>}/>
+        <Route element={<PrivateRoute/>}>
+          <Route path="/userlanding" element={<UserLanding/>}>
+            <Route path="user/chat/:chatid" element={<ChatWindow/>}/>
+            <Route path="profile" element={<UserProfile/>}/>
+            <Route path="user/:userid" element={<UserDetails/>}/>
+          </Route>
         </Route>
 
         <Route path="/admin/login" element={<AdminLogin/>}/>
