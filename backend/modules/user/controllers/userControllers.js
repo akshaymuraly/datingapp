@@ -5,23 +5,44 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
+const { v4: uuid4 } = require("uuid");
+const Requests = require("../models/RequestModel");
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 
 const UserSignup = AsyncHandler(async (req, res, next) => {
-  // console.log(req);
-  const { Name, Location, Email, Password } = req.body;
+  const {
+    Name,
+    Location,
+    Email,
+    Password,
+    Gender,
+    Address,
+    Smocking,
+    Interests,
+    Hobbies,
+  } = req.body;
+  // console.log(req.body);
   if (
+    !Address ||
+    !Smocking ||
     !Name ||
     !Location ||
     !Email ||
     !Password ||
+    !Gender ||
     !req.file ||
     req.file === "" ||
     Location === "" ||
     Email === "" ||
     Name === "" ||
-    Password === ""
+    Password === "" ||
+    Gender === "" ||
+    Smocking === "" ||
+    Address === ""
   ) {
-    return next(new CustomError("No field can be empty!", 300));
+    next(new CustomError("No field can be empty!", 300));
+    return;
   }
   const duplicateUser = await User.findOne({ Email });
   console.log(duplicateUser);
@@ -30,7 +51,12 @@ const UserSignup = AsyncHandler(async (req, res, next) => {
   }
   //File upload block
   const file = req.file;
-  const filepath = path.join(__dirname, "../profile", file.originalname);
+  const newFileName =
+    file.originalname.split(".")[0] +
+    uuid4() +
+    "." +
+    file.originalname.split(".")[1];
+  const filepath = path.join(__dirname, "../profile", newFileName); //New file name
   await fs.promises.writeFile(filepath, file.buffer);
 
   const salt = await bcrypt.genSalt(16);
@@ -40,8 +66,15 @@ const UserSignup = AsyncHandler(async (req, res, next) => {
     Email,
     Location,
     Password: CryptedPassword,
+    Gender,
+    Profile: newFileName,
+    Interests,
+    Hobbies,
+    Address,
+    Smocking,
   });
   await user.save();
+  // console.log("saved user : ", user);
   return res.json({ message: "Record saved!" });
 });
 
@@ -76,6 +109,7 @@ const UserLogin = AsyncHandler(async (req, res, next) => {
 
 const cookieValidation = AsyncHandler(async (req, res, next) => {
   const cookie = req?.headers?.cookie;
+  // console.log("cookie:", cookie);
   if (!cookie) {
     next(new CustomError("No cookie has found!", 401));
     return;
@@ -87,20 +121,89 @@ const cookieValidation = AsyncHandler(async (req, res, next) => {
   }
   const { id } = await jwt.verify(token, process.env.JWT_TOKEN_KEY);
   req.id = id;
-  console.log(req.id);
+  // console.log(req.id);
   // return res.json({ message: "ok" });
   next();
+});
+
+const getUserProfile = AsyncHandler(async (req, res, next) => {
+  const user = await User.findOne({
+    _id: req.id,
+  });
+  if (!user) {
+    next(new CustomError("No user found!", 401));
+  }
+  const filePath = path.resolve(__dirname, "../profile", user.Profile);
+  const file = await fs.promises.readFile(filePath);
+  user.Profile = file ? file.toString("base64") : null;
+  return res.json({ message: "Details fetched!", user });
 });
 
 const matchedProfiles = AsyncHandler(async (req, res, next) => {
   const { gender, age, page, count } = req.query;
   const start = (page - 1) * count;
-  const users = await User.find({ Gender: { $ne: gender } })
+  const users = await User.find({
+    _id: { $ne: req.id },
+    Gender: { $ne: gender },
+  })
     .skip(start)
     .limit(count);
   if (!users) return next(new CustomError("No matchin profile!", 401));
 
-  return res.json({ message: "profiles fetched!", users });
+  const request = await Requests.find({
+    $or: [{ senderId: req.id }, { receiverId: req.id }],
+  })
+    .populate("senderId")
+    .populate("receiverId");
+  // console.log("users : ", users);
+
+  const usersWithFiles = await Promise.all(
+    users.map(async (user) => {
+      // console.log("USER : ", user);
+      let state = null;
+      try {
+        for (const item of request) {
+          // console.log(
+          //   user._id,
+          //   ": ",
+          //   item?.receiverId._id.toString() === user._id.toString()
+          // );
+          if (item?.senderId._id.toString() === user._id.toString()) {
+            // console.log("tru for id:", user._id);
+            state = {
+              //to check the particular user has send the request or not
+              ...item,
+              sender: true,
+            };
+            break;
+          } else if (item?.receiverId._id.toString() === user._id.toString()) {
+            // console.log("tru for id:", user._id);
+            state = {
+              ...item,
+              sender: false,
+            };
+            break;
+          }
+        }
+        const filePath = path.resolve(__dirname, "../profile", user.Profile);
+        const file = await fs.promises.readFile(filePath);
+        // console.log("File : ", file);
+        return {
+          ...user.toObject(),
+          request_status: state,
+          file: file.toString("base64"),
+        };
+      } catch (err) {
+        return {
+          ...user.toObject(), //a spread would work but toobject used to convert it again to mongoose object to have save,remove etc mongoose specific methods.
+          request_status: state,
+          file: null,
+        };
+      }
+    })
+  );
+  // console.log("USERS : ", usersWithFiles);
+  return res.json({ message: "profiles fetched!", users: usersWithFiles });
 });
 
 module.exports = {
@@ -108,4 +211,5 @@ module.exports = {
   UserLogin,
   cookieValidation,
   matchedProfiles,
+  getUserProfile,
 };

@@ -16,6 +16,8 @@ const messageRouter = require("./modules/user/routes/messageRoutes");
 const userRouter = require("./modules/user/routes/userRoutes");
 const adminRouter = require("./modules/admin/routes/adminRoutes");
 const googleRouter = require("./modules/user/routes/googleAuthRoutes");
+const requestRouter = require("./modules/user/routes/requestRoutes");
+const reportRouter = require("./modules/user/routes/reportRoutes");
 
 // ----------SETTING MIDDLEWARES---------
 
@@ -51,6 +53,8 @@ app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api", googleRouter);
 app.use("/api/message", messageRouter);
+app.use("/api/request", requestRouter);
+app.use("/api/reports", reportRouter);
 
 // ----------ERROR HANDLER---------------
 

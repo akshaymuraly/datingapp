@@ -3,7 +3,7 @@ const { CustomError } = require("../../../middlewares/CustomError");
 const User = require("../models/UserModel");
 const jwt = require("jsonwebtoken");
 
-const googleAuth = AsyncHandler(async (req, res) => {
+const googleAuth = AsyncHandler(async (req, res, next) => {
   const data = req.user;
   const Email = data.emails[0].value;
   const user = await User.findOne({ Email });
@@ -21,7 +21,7 @@ const googleAuth = AsyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   });
-  return res.redirect("http://localhost:5173/login");
+  return res.redirect("http://localhost:5173/lander");
 });
 
 const validator = async (req, res) => {

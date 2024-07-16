@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     delete userSocketMap[userId];
-    console.log(userSocketMap);
+    console.log("Disconnected:", userSocketMap);
   });
 });
 module.exports = { app, io, server, getReceiverSocketId };

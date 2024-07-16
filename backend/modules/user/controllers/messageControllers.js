@@ -9,8 +9,6 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const sendMessage = AsyncHandler(async (req, res, next) => {
   const { receiverId } = req.params;
-  console.log("Receiver ID:", receiverId);
-  console.log("Sender id : ", req.id);
   const { message } = req.body;
   // console.log(message);
   const senderId = req.id;
@@ -50,12 +48,11 @@ const sendMessage = AsyncHandler(async (req, res, next) => {
     io.to(receiverSocketId).emit("newMessage", newMessage);
   }
 
-  return res.status(201).json(newMessage);
+  return res.status(201).json({ newMessage });
 });
 
 const getMessages = AsyncHandler(async (req, res, next) => {
   const { userToChat } = req.params;
-  // console.log("g");
   // console.log(userToChat, req.id);
   const userId = req.id;
   const conversation = await Conversations.findOne({
@@ -80,7 +77,6 @@ const getConversations = AsyncHandler(async (req, res, next) => {
       $in: [userId],
     },
   }).populate("Participants");
-  // console.log(conversations);
   conversations = conversations.map((each) => {
     each["Participants"] = each.Participants.filter((item) => {
       if (item._id != userId) {

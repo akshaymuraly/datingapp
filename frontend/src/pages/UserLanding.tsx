@@ -1,12 +1,13 @@
-import MenuBar from "../components/layout/MenuBar"
-import RightWindow from "../components/layout/RightWindow"
-import Footer from "../components/layout/Footer"
 import { useSocket } from "../context/SocketContext"
 import { useEffect } from "react"
 import axios from "axios"
+import UserNav from "../components/layout/userGrid/UserNav"
+import UserBody from "../components/layout/userGrid/UserBody"
+import { ProfileProvider } from "../context/ProfileContext"
+
+
 axios.defaults.withCredentials=true
 
-// import { Socket } from "socket.io-client"
 
 const UserLanding = () => {
   const{socket}:any = useSocket()
@@ -21,12 +22,11 @@ const UserLanding = () => {
     })
   },[])
   return (
-    <section className="p-3 bg-[#373a40d0]">
-    <section className="flex flex-row">
-        <MenuBar/>
-        <RightWindow/>
-    </section>
-    <Footer/>
+    <section className="bg-[#fefeff] h-screen w-screen">
+        <UserNav/>
+        <ProfileProvider>
+          <UserBody/>
+        </ProfileProvider>
     </section>
   )
 }
